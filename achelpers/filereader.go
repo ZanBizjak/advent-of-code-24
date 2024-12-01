@@ -2,7 +2,6 @@ package achelpers
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -31,7 +30,6 @@ func IntReadTwoColumns(filestring string, splitter string) ([]int, []int) {
 
 	for scanner.Scan() {
 		row := scanner.Text()
-		fmt.Println(row)
 		firstNum, err := strconv.Atoi(strings.Split(row, splitter)[0])
 		if err != nil {
 			log.Fatal(err)
