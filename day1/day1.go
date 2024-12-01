@@ -3,7 +3,7 @@ package day1
 import (
 	"fmt"
 
-	"advent-of-code-24/achelpers"
+	"github.com/zanBizjak/advent-of-code-24/achelpers"
 )
 
 func Task1() {
