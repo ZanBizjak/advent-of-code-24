@@ -49,3 +49,39 @@ func IntReadTwoColumns(filestring string, splitter string) ([]int, []int) {
 
 	return col1, col2
 }
+
+func IntReadGrid(filestring string, splitter string) [][]int {
+	var grid [][]int
+	rows := readRows(filestring)
+	for i, row := range rows {
+		grid = append(grid, make([]int, 0))
+		strNums := strings.Split(row, splitter)
+		for _, strNum := range strNums {
+			num, err := strconv.Atoi(strNum)
+			if err != nil {
+				log.Fatal(err)
+			}
+			grid[i] = append(grid[i], num)
+		}
+
+	}
+
+	return grid
+}
+
+func readRows(filestring string) []string {
+	file, err := os.Open(filestring)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	var rows []string
+	for scanner.Scan() {
+		row := scanner.Text()
+		rows = append(rows, row)
+	}
+
+	return rows
+}
