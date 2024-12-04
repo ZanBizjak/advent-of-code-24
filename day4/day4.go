@@ -75,21 +75,28 @@ func findXmas(r []rune) int {
 				runeState++
 				break
 			}
+			runeState = 0
 		case 1:
-			if char == 'X' {
+			if char == 'M' {
 				runeState++
 				break
 			}
 			runeState = 0
 
 		case 2:
-			if char == 'X' {
+			if char == 'A' {
+				runeState++
+				break
+			}
+			runeState = 0
+		case 3:
+			if char == 'S' {
 				runeState++
 				break
 			}
 			runeState = 0
 		}
-		if runeState == 3 {
+		if runeState == 4 {
 			numOfXmas++
 			runeState = 0
 		}
