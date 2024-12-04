@@ -5,3 +5,8 @@ func IntRemoveIndex(s []int, index int) []int {
 	ret = append(ret, s[:index]...)
 	return append(ret, s[index+1:]...)
 }
+
+func RuneCopySlice(s []rune) []rune {
+	ret := make([]rune, 0)
+	return append(ret, s...)
+}

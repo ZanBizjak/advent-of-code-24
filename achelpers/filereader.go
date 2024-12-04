@@ -69,6 +69,17 @@ func IntReadGrid(filestring string, splitter string) [][]int {
 	return grid
 }
 
+func RuneGetGrid(filestring string) [][]rune {
+	s := readRows(filestring)
+	var grid [][]rune
+	for i, str := range s {
+		grid = append(grid, make([]rune, 0))
+		grid[i] = []rune(str)
+	}
+
+	return grid
+}
+
 func readRows(filestring string) []string {
 	file, err := os.Open(filestring)
 	if err != nil {
