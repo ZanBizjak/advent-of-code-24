@@ -52,7 +52,7 @@ func IntReadTwoColumns(filestring string, splitter string) ([]int, []int) {
 
 func IntReadGrid(filestring string, splitter string) [][]int {
 	var grid [][]int
-	rows := readRows(filestring)
+	rows := ReadRows(filestring)
 	for i, row := range rows {
 		grid = append(grid, make([]int, 0))
 		strNums := strings.Split(row, splitter)
@@ -70,7 +70,7 @@ func IntReadGrid(filestring string, splitter string) [][]int {
 }
 
 func RuneGetGrid(filestring string) [][]rune {
-	s := readRows(filestring)
+	s := ReadRows(filestring)
 	var grid [][]rune
 	for i, str := range s {
 		grid = append(grid, make([]rune, 0))
@@ -80,7 +80,7 @@ func RuneGetGrid(filestring string) [][]rune {
 	return grid
 }
 
-func readRows(filestring string) []string {
+func ReadRows(filestring string) []string {
 	file, err := os.Open(filestring)
 	if err != nil {
 		log.Fatal(err)
