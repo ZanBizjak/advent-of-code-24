@@ -10,3 +10,12 @@ func RuneCopySlice(s []rune) []rune {
 	ret := make([]rune, 0)
 	return append(ret, s...)
 }
+
+func RuneCopyGrid(s [][]rune) [][]rune {
+	ret := make([][]rune, 0)
+	for _, arr := range s {
+		ret = append(ret, RuneCopySlice(arr))
+	}
+
+	return ret
+}
