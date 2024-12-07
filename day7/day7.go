@@ -13,12 +13,12 @@ func Task1() {
 	inputs := achelpers.ReadRows("day7.txt")
 	var res int64 = 0
 	for _, input := range inputs {
-		res += validResult(input)
+		res += validResultv2(input, 2)
 	}
 	fmt.Println(res)
 }
 
-func validResult(input string) int64 {
+func validResultv2(input string, numOfOps int) int64 {
 	resAndNums := strings.Split(input, ": ")
 	result, err := strconv.ParseInt(resAndNums[0], 10, 64)
 
@@ -26,38 +26,7 @@ func validResult(input string) int64 {
 		log.Fatal("error converting the result portion of the input")
 	}
 	nums := achelpers.StrToIntSlice(resAndNums[1], " ")
-	opFlags := 0
-	for opFlags != 1<<(len(nums)-1) {
-		copyNums := achelpers.IntCopySlice(nums)
-		for i := 0; i < len(nums)-1; i++ {
-			op := opFlags & (1 << i)
-			var together int64
-			if op == 0 {
-				together = copyNums[0] + copyNums[1]
-			} else {
-				together = copyNums[0] * copyNums[1]
-			}
-			copyNums = copyNums[1:]
-			copyNums[0] = together
-		}
-		if copyNums[0] == result {
-			return result
-		}
-		opFlags++
-	}
-
-	return 0
-}
-
-func validResultv2(input string) int64 {
-	resAndNums := strings.Split(input, ": ")
-	result, err := strconv.ParseInt(resAndNums[0], 10, 64)
-
-	if err != nil {
-		log.Fatal("error converting the result portion of the input")
-	}
-	nums := achelpers.StrToIntSlice(resAndNums[1], " ")
-	combos := pow(3, len(nums)-1)
+	combos := pow(numOfOps, len(nums)-1)
 	opTable := make([]int, len(nums)-1)
 	for opFlags := 0; opFlags < combos; opFlags++ {
 
@@ -69,7 +38,7 @@ func validResultv2(input string) int64 {
 				together = copyNums[0] + copyNums[1]
 			} else if op == 1 {
 				together = copyNums[0] * copyNums[1]
-			} else {
+			} else if op == 2 {
 				cc, err := strconv.ParseInt(fmt.Sprintf("%v%v", copyNums[0], copyNums[1]), 10, 64)
 				if err != nil {
 					log.Panic("AAAAAAAA")
@@ -84,7 +53,7 @@ func validResultv2(input string) int64 {
 		if copyNums[0] == result {
 			return result
 		}
-		opTable = increment(opTable, 0, 3)
+		opTable = increment(opTable, 0, numOfOps)
 	}
 
 	return 0
@@ -117,7 +86,7 @@ func Task2() {
 	inputs := achelpers.ReadRows("day7.txt")
 	var res int64 = 0
 	for _, input := range inputs {
-		res += validResultv2(input)
+		res += validResultv2(input, 3)
 	}
 	fmt.Println(res)
 }
