@@ -10,6 +10,7 @@ import (
 	"github.com/zanBizjak/advent-of-code-24/day5"
 	"github.com/zanBizjak/advent-of-code-24/day6"
 	"github.com/zanBizjak/advent-of-code-24/day7"
+	"github.com/zanBizjak/advent-of-code-24/day8"
 )
 
 func main() {
@@ -31,6 +32,8 @@ func main() {
 		taskDay6(task)
 	case "7":
 		taskDay7(task)
+	case "8":
+		taskDay8(task)
 	}
 
 }
@@ -89,4 +92,12 @@ func taskDay7(task string) {
 		return
 	}
 	day7.Task2()
+}
+
+func taskDay8(task string) {
+	if task == "1" {
+		day8.Task1()
+		return
+	}
+	day8.Task2()
 }
